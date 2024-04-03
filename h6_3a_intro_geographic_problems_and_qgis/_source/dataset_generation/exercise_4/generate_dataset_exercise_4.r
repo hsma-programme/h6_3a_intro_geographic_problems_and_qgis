@@ -14,6 +14,10 @@ library(stringr)
 library(lubridate)
 library(readr)
 
+
+# Download lookup from https://geoportal.statistics.gov.uk/datasets/b6ea48b4d3bc40e5b33c1580e686d254/about
+# Not included in repo as large size (>400mb)
+
 lsoa_lookup <- readr::read_csv("/home/sammi/HSMA/h6_3a_intro_geographic_problems_and_qgis/h6_3a_intro_geographic_problems_and_qgis/_source/dataset_generation/helpers/PCD_OA_LSOA_MSOA_LAD_FEB19_UK_LU.csv") %>%
     distinct(msoa11cd, lsoa11cd)
 
