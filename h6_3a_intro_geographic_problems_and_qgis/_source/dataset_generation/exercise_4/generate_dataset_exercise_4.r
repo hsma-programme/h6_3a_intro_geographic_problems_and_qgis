@@ -49,6 +49,16 @@ counts_casualties_2018_2022_by_msoa <- all_casualties_2018_2022 %>%
     group_by(msoa11cd) %>%
     summarize(n = sum(n, na.rm=TRUE))
 
+counts_casualties_2018_2022_by_msoa_of_accident <- all_casualties_2018_2022 %>%
+    left_join(all_collisions_2018_2022 %>% distinct(accident_reference, accident_index, lsoa_of_accident_location), by = c("accident_index", "accident_reference")) %>%
+    count(accident_reference, lsoa_of_accident_location, accident_year) %>%
+    group_by(lsoa_of_accident_location) %>%
+    summarize(n = sum(n, na.rm=TRUE)) %>%
+    dplyr::full_join(lsoa_lookup, by=c("lsoa_of_accident_location" = "lsoa11cd")) %>%
+    group_by(msoa11cd) %>%
+    summarize(n = sum(n, na.rm=TRUE)) %>%
+    rename("total_number_of_casualties_by_msoa_of_accident_2018_2022" = "n")
+
 get_counts_collision_df <- function(filtered_df) {
     filtered_df %>%
         distinct(accident_index, accident_year, accident_reference, lsoa_of_accident_location) %>%
@@ -136,8 +146,8 @@ counts_winter <- all_collisions_2018_2022 %>%
 
 all_counts <- counts_collisions_2018_2022_by_msoa %>%
     rename("total_number_of_collisions_2018_2022" = "n") %>%
-    left_join(counts_casualties_2018_2022_by_msoa %>% rename("total_number_of_casualties_2018_2022" = "n"), by="msoa11cd") %>%
-    mutate(across(where(is.numeric), \(x) tidyr::replace_na(x, 0))) %>%
+    left_join(counts_casualties_2018_2022_by_msoa %>% rename("total_number_of_casualties_by_casualty_lsoa_2018_2022" = "n"), by="msoa11cd") %>%
+    left_join(counts_casualties_2018_2022_by_msoa_of_accident, by="msoa11cd")  %>%
     left_join(counts_fatal_casualties_2018_2022_by_msoa, by="msoa11cd") %>%
     left_join(counts_cyclist_casualties_2018_2022_by_msoa, by="msoa11cd") %>%
     left_join(counts_pedestrian_casualties_2018_2022_by_msoa, by="msoa11cd") %>%
@@ -149,7 +159,8 @@ all_counts <- counts_collisions_2018_2022_by_msoa %>%
     left_join(counts_darkness, by="msoa11cd") %>%
     left_join(counts_daylight, by="msoa11cd") %>%
     left_join(counts_summer, by="msoa11cd") %>%
-    left_join(counts_winter, by="msoa11cd")
+    left_join(counts_winter, by="msoa11cd") %>%
+    mutate(across(where(is.numeric), \(x) tidyr::replace_na(x, 0)))
 
 
 all_counts %>% readr::write_csv("stats19_counts_by_msoa_2018_2022.csv")
