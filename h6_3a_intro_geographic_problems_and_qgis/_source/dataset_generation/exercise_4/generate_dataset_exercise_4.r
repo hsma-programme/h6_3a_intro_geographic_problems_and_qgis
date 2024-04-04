@@ -57,13 +57,15 @@ get_counts_collision_df <- function(filtered_df) {
         count(msoa11cd, sort=TRUE)
 }
 
+# For these, we want to look at the lsoa the collision took place in - not the home lsoa of the casualty
 get_counts_casualty_df <- function(filtered_df) {
     filtered_df %>%
-        count(accident_reference, lsoa_of_casualty, accident_year) %>%
-        group_by(lsoa_of_casualty) %>%
+        left_join(all_collisions_2018_2022 %>% distinct(accident_reference, accident_index, lsoa_of_accident_location), by = c("accident_index", "accident_reference")) %>%
+        count(accident_reference, lsoa_of_accident_location, accident_year) %>%
+        group_by(lsoa_of_accident_location) %>%
         summarize(n = sum(n, na.rm=TRUE)) %>%
-        dplyr::full_join(lsoa_lookup, by=c("lsoa_of_casualty" = "lsoa11cd")) %>%
-        filter(lsoa_of_casualty != -1) %>%
+        dplyr::full_join(lsoa_lookup, by=c("lsoa_of_accident_location" = "lsoa11cd")) %>%
+        filter(lsoa_of_accident_location != -1) %>%
         group_by(msoa11cd) %>%
         summarize(n = sum(n, na.rm=TRUE))
 }
@@ -91,7 +93,7 @@ counts_car_occupant_casualties_2018_2022_by_msoa <- all_casualties_2018_2022 %>%
 counts_motorcycle_casualties_2018_2022_by_msoa <- all_casualties_2018_2022 %>%
     filter(stringr::str_detect(casualty_type, "Motorcycle")) %>%
     get_counts_casualty_df() %>%
-    rename("car_occupant_casualties_2018_2022" = "n")
+    rename("motorcycle_casualties_2018_2022" = "n")
 
 counts_horse_rider_casualties_2018_2022_by_msoa <- all_casualties_2018_2022 %>%
     filter(casualty_type=="Horse rider") %>%
@@ -129,25 +131,25 @@ counts_winter <- all_collisions_2018_2022 %>%
     mutate(month = lubridate::month(date)) %>%
     filter(month==12 | month==1 | month==2) %>%
     get_counts_collision_df() %>%
-    rename("summer_collisions_2018_2022" = "n")
+    rename("winter_collisions_2018_2022" = "n")
 
 
 all_counts <- counts_collisions_2018_2022_by_msoa %>%
     rename("total_number_of_collisions_2018_2022" = "n") %>%
     left_join(counts_casualties_2018_2022_by_msoa %>% rename("total_number_of_casualties_2018_2022" = "n"), by="msoa11cd") %>%
     mutate(across(where(is.numeric), \(x) tidyr::replace_na(x, 0))) %>%
-    left_join(counts_fatal_casualties_2018_2022_by_msoa) %>%
-    left_join(counts_cyclist_casualties_2018_2022_by_msoa) %>%
-    left_join(counts_pedestrian_casualties_2018_2022_by_msoa) %>%
-    left_join(counts_car_occupant_casualties_2018_2022_by_msoa) %>%
-    left_join(counts_motorcycle_casualties_2018_2022_by_msoa) %>%
-    left_join(counts_horse_rider_casualties_2018_2022_by_msoa) %>%
-    left_join(counts_snow) %>%
-    left_join(counts_fog) %>%
-    left_join(counts_darkness) %>%
-    left_join(counts_daylight) %>%
-    left_join(counts_summer) %>%
-    left_join(counts_winter)
+    left_join(counts_fatal_casualties_2018_2022_by_msoa, by="msoa11cd") %>%
+    left_join(counts_cyclist_casualties_2018_2022_by_msoa, by="msoa11cd") %>%
+    left_join(counts_pedestrian_casualties_2018_2022_by_msoa, by="msoa11cd") %>%
+    left_join(counts_car_occupant_casualties_2018_2022_by_msoa, by="msoa11cd") %>%
+    left_join(counts_motorcycle_casualties_2018_2022_by_msoa, by="msoa11cd") %>%
+    left_join(counts_horse_rider_casualties_2018_2022_by_msoa, by="msoa11cd") %>%
+    left_join(counts_snow, by="msoa11cd") %>%
+    left_join(counts_fog, by="msoa11cd") %>%
+    left_join(counts_darkness, by="msoa11cd") %>%
+    left_join(counts_daylight, by="msoa11cd") %>%
+    left_join(counts_summer, by="msoa11cd") %>%
+    left_join(counts_winter, by="msoa11cd")
 
 
 all_counts %>% readr::write_csv("stats19_counts_by_msoa_2018_2022.csv")
