@@ -1,7 +1,7 @@
 import geopandas
 import pandas as pd
 
-stats19_counts_by_msoa_2018_2022  = pd.read_csv("h6_3a_intro_geographic_problems_and_qgis/_source/dataset_generation/exercise_3/stats19_counts_by_msoa_2018_2022.csv")
+stats19_counts_by_msoa_2018_2022  = pd.read_csv("h6_3a_intro_geographic_problems_and_qgis/_source/dataset_generation/exercise_4/stats19_counts_by_msoa_2018_2022.csv")
 
 msoa_gdf = geopandas.read_file("h6_3a_intro_geographic_problems_and_qgis/_source/dataset_generation/helpers/MSOA_casualties_collisions_3857.gpkg")
 
@@ -15,4 +15,4 @@ msoa_gdf_counts = pd.merge(
     how="left"
 ).drop(columns="msoa11cd")
 
-msoa_gdf_counts.to_file("h6_3a_intro_geographic_problems_and_qgis/_source/dataset_generation/exercise_4/stats_19_counts_by_msoa_3857.geojson", driver='GeoJSON')
+msoa_gdf_counts.to_file("h6_3a_intro_geographic_problems_and_qgis/datasets/stats_19_counts_by_msoa_3857.geojson", driver='GeoJSON')
