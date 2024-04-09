@@ -11,7 +11,6 @@ Students should be able to:
 - Know what common problems encountered with these kinds of tasks (regional borders, raw vs standardised demand, limits of force)
 - Explain the following geographical terms and concepts: latitude, longitude, northing, easting, CRS, BNSSG, projection, OA, LSOA, MSOA, postcode, trust, ICB, choropleth
 - Explain the reasons behind choosing different projections
-- Identify common geographical data format (GeoJSON, GeoPackage, ESRI shapefiles) and explain the benefits of each
 
 ### Part 2: Geographic Visualisation using QGIS
 
