@@ -27,4 +27,7 @@ Students should be able to:
 - Add simple labels to points
 
 
+---
+# Credits
+
 Officer icon: https://healthicons.org/icon/filled/people/officer
