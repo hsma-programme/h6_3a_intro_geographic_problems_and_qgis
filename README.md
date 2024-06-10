@@ -25,3 +25,6 @@ Students should be able to:
 - Change the style of points (for all points or by a chosen data category)
 - Import custom markers
 - Add simple labels to points
+
+
+Officer icon: https://healthicons.org/icon/filled/people/officer
