@@ -1,5 +1,9 @@
 # HSMA Session 3A
 
+## Additional QGIS Reference Materials
+
+A reference guide for some of the QGIS skills we're going to learn today can be found here: https://github.com/hsma-programme/5c_geo_vz_qgis/blob/main/200824_QGIS_training_with_PenCHORD.pdf
+
 ## Learning Objectives
 
 ### Part 1: An Introduction to Geospatial Problems in Health
