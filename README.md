@@ -4,6 +4,8 @@
 
 A reference guide for some of the QGIS skills we're going to learn today can be found here: https://github.com/hsma-programme/5c_geo_vz_qgis/blob/main/200824_QGIS_training_with_PenCHORD.pdf
 
+(note that the linked document accompanied an older version of this module; it covers some of the concepts we'll be doing in session 2B as well, and covers a different method of creating a basemap, so some elements may vary)
+
 ## Learning Objectives
 
 ### Part 1: An Introduction to Geospatial Problems in Health
