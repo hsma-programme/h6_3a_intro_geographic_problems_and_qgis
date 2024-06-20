@@ -45,4 +45,5 @@ Students should be able to:
 # Credits
 
 Officer icon: https://healthicons.org/icon/filled/people/officer
+
 Stats19 Dataset: https://github.com/ropensci/stats19
