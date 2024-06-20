@@ -4,6 +4,10 @@
 
 <a href="https://docs.google.com/presentation/d/1wlSArF-bGbrpJKYnOZ5ta0JN4pCC8gq1blZftgetvkA/edit?usp=sharing"><img src="https://img.shields.io/static/v1?label=Google+Slides&message=Click+here+to+view+the+slides+for+this+session&color=%23FBBC04&style=for-the-badge&logo=googleslides&logoColor=%23FBBC04" alt="Google Slides - Click here to view slides for this session"></a>
 
+## Lecture Recording
+
+<a href="https://www.youtube.com/watch?v=t-5KKMr3El4"><img src="https://img.shields.io/static/v1?label=Youtube&message=Click+here+to+watch+the+lecture&color=%23282828&style=for-the-badge&logo=youtube&logoColor=%23FF0000" alt="Youtube - Click here to watch the lecture"></a>
+
 ## Additional QGIS Reference Materials
 
 A reference guide for some of the QGIS skills we're going to learn today can be found here: https://github.com/hsma-programme/5c_geo_vz_qgis/blob/main/200824_QGIS_training_with_PenCHORD.pdf
