@@ -8,6 +8,10 @@
 
 <a href="https://www.youtube.com/watch?v=t-5KKMr3El4"><img src="https://img.shields.io/static/v1?label=Youtube&message=Click+here+to+watch+the+lecture&color=%23282828&style=for-the-badge&logo=youtube&logoColor=%23FF0000" alt="Youtube - Click here to watch the lecture"></a>
 
+## Book
+
+<a href="https://hsma-programme.github.io/hsma6_geographic_optimisation_and_visualisation_book/"><img src="https://img.shields.io/static/v1?label=Book&message=Click+here+to+view+the+relevant+HSMA+book&color=%23782828&style=for-the-badge&logo=mdbook" alt="Book - Click here to view the relevant HSMA book"></a>
+
 ## Additional QGIS Reference Materials
 
 A reference guide for some of the QGIS skills we're going to learn today can be found here: https://github.com/hsma-programme/5c_geo_vz_qgis/blob/main/200824_QGIS_training_with_PenCHORD.pdf
